@@ -159,40 +159,11 @@ if __name__ == '__main__':
     C = 10**6  # transmission rate of output link in bits per second
     T = 1000  # the total time for simulation
 
-    # initializing arrays that keep track of E[N], P_IDLE, and rho
-    ENArray = []
-    PIDLEArray = []
-    rhoArray = []
+    rho = 1.2
+    lamb = (C*rho)/avg_l  # average number of packets generated / second
 
-    for i in range(25, 96, 10):
-        rho = i/100  # utilization of queue
-        lamb = (C*rho)/avg_l  # average number of packets generated / second
+    E_N, P_IDLE = oneSimulation(lamb, avg_l, C, T)
 
-        # calls one iteration of the simulation to output one pair of E[N] and P_IDLE
-        E_N, P_IDLE = oneSimulation(lamb, avg_l, C, T)
-
-        # append the values onto an array to later graph
-        ENArray.append(E_N)
-        PIDLEArray.append(P_IDLE)
-        rhoArray.append(rho)
-
-    # create two subplots so that both E[N] and P_IDLE plot at the same time
-    f1 = plt.figure()
-    f2 = plt.figure()
-
-    # setting up figure 1 for E[N] vs rho
-    ax1 = f1.add_subplot(111)
-    ax1.plot(rhoArray, ENArray)
-    ax1.set_xlabel('rho')
-    ax1.set_ylabel('E[N]')
-    ax1.set_title("E[n] vs rho")
-
-    # setting up figure 2 for P_IDLE vs rho
-    ax2 = f2.add_subplot(111)
-    ax2.plot(rhoArray, PIDLEArray)
-    ax2.set_xlabel('rho')
-    ax2.set_ylabel('P_IDLE')
-    ax2.set_title("P_IDLE vs rho")
-
-    plt.show()
+    print("The E_N is " + str(E_N))
+    print("The P_IDLE is " + str(P_IDLE))
 
