@@ -219,3 +219,6 @@ if __name__ == '__main__':
     ax1.legend()
     ax2.legend()
     plt.show()
+    f1.savefig("E[n] vs rho for Finite Buffer.png")
+    f1.savefig("P_LOSS vs rho for Finite Buffer.png")
+    plt.close()

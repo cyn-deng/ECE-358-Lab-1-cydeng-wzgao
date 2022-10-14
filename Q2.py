@@ -195,4 +195,7 @@ if __name__ == '__main__':
     ax2.set_title("P_IDLE vs rho")
 
     plt.show()
+    f1.savefig("E[n] vs rho for Infinite Buffer.png")
+    f2.savefig("P_IDLE vs rho for Infinite Buffer.png")
+    plt.close()
 
