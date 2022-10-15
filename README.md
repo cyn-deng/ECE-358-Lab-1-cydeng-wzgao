@@ -8,3 +8,5 @@ The programs output a "Print" statement that will print the values with a descri
 Clone this repository on ECEUbuntu terminal and run with python3 for running programs on ECEUbuntu.
 
 Run Q1.py with "python3 q1.py" for obtaining results of question 1, Q2.py for question 2, Q4.py for question 4, Q5.py for question 5, and Q6.py for question 6.
+
+Question 3 uses the same code as Question 4 except the rho value is changed.
