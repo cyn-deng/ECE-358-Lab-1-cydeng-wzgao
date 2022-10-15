@@ -2,7 +2,6 @@
 import random
 import math
 import matplotlib.pyplot as plt
-import datetime
 from collections import deque
 
 
@@ -146,7 +145,7 @@ def queueProcessing(DES, T, total_lost, total_created_packets):
             total_packets += (N_a - N_d)
         i += 1
 
-    # calculating E[N] and P_IDLE
+    # calculating E[N], P_IDLE, and P_LOSS
     E_N = total_packets / N_o
     P_IDLE = idle / N_o
     P_LOSS = total_lost / total_created_packets
@@ -182,12 +181,15 @@ if __name__ == '__main__':
 
     f1 = plt.figure()
     f2 = plt.figure()
+
+    # setting up figure 1 for E[N] vs rho
     ax1 = f1.add_subplot(1, 1, 1)
     ax2 = f2.add_subplot(1, 1, 1)
     ax1.set_xlabel('rho')
     ax1.set_ylabel('E[N]')
     ax1.set_title("E[n] vs rho")
 
+    # setting up figure 2 for P_IDLE vs rho
     ax2.set_xlabel('rho')
     ax2.set_ylabel('P_LOSS')
     ax2.set_title("P_LOSS vs rho")
@@ -200,20 +202,18 @@ if __name__ == '__main__':
             rho = j / 100  # utilization of queue
             lamb = (C * rho) / avg_l  # average number of packets generated / second
 
-            # calls one iteration of the simulation to output one pair of E[N] and P_IDLE
+            # calls one iteration of the simulation to output one pair of E[N] and P_LOSS
             E_N, P_IDLE, P_LOSS = oneSimulation(lamb, avg_l, C, T, K)
 
             # append the values onto an array to later graph
             ENArray.append(E_N)
-            PLOSSArray.append(P_IDLE)
+            PLOSSArray.append(P_LOSS)
             rhoArray.append(rho)
 
-        # create two subplots so that both E[N] and P_IDLE plot at the same time
+        # create two subplots so that both E[N] and P_LOSS plot at the same time
 
-        # setting up figure 1 for E[N] vs rho
         ax1.plot(rhoArray, ENArray, label="K=" + str(K))
 
-        # setting up figure 2 for P_IDLE vs rho
         ax2.plot(rhoArray, PLOSSArray, label="K=" + str(K))
 
     ax1.legend()
